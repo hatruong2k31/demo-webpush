@@ -8,7 +8,7 @@ const firebaseConfig = {
   measurementId: "G-WT2CJ81E9J",
 };
 
-firebase.initializeApp(firebaseConfig);
+firebase?.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
@@ -16,12 +16,15 @@ messaging
   .requestPermission()
   .then(function () {
     console.log("Quyền thông báo đã được cấp!");
-    return messaging.getToken();
+    return messaging.getToken({
+      vapidKey:
+        "BGQkvie7tjIuh3b8D-HOTE3-W7oCDfcRnLMI9RpVPrmk72jjcH7yfs6EdTnR0iJFsXQYN9V0MIzP-Yzyh1jofxA",
+    });
   })
   .then(function (currentToken) {
     console.log("Token : " + currentToken);
     // Gửi token này lên máy chủ để lưu lại và sử dụng khi gửi thông báo.
   })
   .catch(function (err) {
-    console.log("Không cấp quyền thông báo: " + err);
+    console.log(err);
   });
