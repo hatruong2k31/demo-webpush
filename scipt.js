@@ -20,16 +20,36 @@ function IntitalizeFireBaseMessaging() {
           "BGQkvie7tjIuh3b8D-HOTE3-W7oCDfcRnLMI9RpVPrmk72jjcH7yfs6EdTnR0iJFsXQYN9V0MIzP-Yzyh1jofxA",
       });
     })
-    .then(function (token) {
+    .then((token) => {
       console.log("Token : " + token);
       document.getElementById("token").innerHTML = token;
+      const registrationTokens = [token];
+
+      const topic = "hehe"; // Thay thế với tên chủ đề của bạn
+      messaging
+        .subscribeToTopic(topic)
+        .then(() => {
+          console.log(`Đã đăng ký thành công với chủ đề ${topic}`);
+        })
+        .catch((error) => {
+          console.log(`Lỗi đăng ký với chủ đề ${topic}: `, error);
+        });
+      // messaging
+      //   .getMessaging()
+      //   .subscribeToTopic(registrationTokens, topic)
+      //   .then((response) => {
+      //     console.log("Successfully subscribed to topic:", response);
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error subscribing to topic:", error);
+      //   });
     })
-    .catch(function (reason) {
-      console.log(reason);
+    .catch((reason) => {
+      console.error(reason);
     });
 }
 
-messaging.onMessage(function (payload) {
+messaging.onMessage((payload) => {
   console.log(payload);
   const notificationOption = {
     body: payload.notification.body,
@@ -50,7 +70,7 @@ messaging.onMessage(function (payload) {
   }
 });
 
-messaging.onTokenRefresh(function () {
+messaging.onTokenRefresh(() => {
   messaging
     .getToken()
     .then(function (newtoken) {
