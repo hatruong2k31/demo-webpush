@@ -1,12 +1,13 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyCaIKBIfi3OO5FqUtW7kRBvP4NWqyq2qUI",
-  authDomain: "test-fcm-a1205.firebaseapp.com",
-  projectId: "test-fcm-a1205",
-  storageBucket: "test-fcm-a1205.appspot.com",
-  messagingSenderId: "408902584117",
-  appId: "1:408902584117:web:ee6d2dcda80c7473746e7c",
-  measurementId: "G-WT2CJ81E9J",
+  apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
+  authDomain: "webpushnotification-18248.firebaseapp.com",
+  projectId: "webpushnotification-18248",
+  storageBucket: "webpushnotification-18248.appspot.com",
+  messagingSenderId: "633791818397",
+  appId: "1:633791818397:web:662c3155350fe23a22c274",
+  measurementId: "G-CL1SN2102X",
 };
+
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
@@ -17,7 +18,7 @@ function IntitalizeFireBaseMessaging() {
       console.log("Quyền thông báo đã được cấp!");
       return messaging.getToken({
         vapidKey:
-          "BGQkvie7tjIuh3b8D-HOTE3-W7oCDfcRnLMI9RpVPrmk72jjcH7yfs6EdTnR0iJFsXQYN9V0MIzP-Yzyh1jofxA",
+          "BCy4EVfXHpIdK-unBIYieIfSBngDBPWwjsngkNz57UxW4N-ahPUgVgGY99fLIfIWTwIj1ZKeGi2yOJIP5Y9Rw28",
       });
     })
     .then((token) => {

@@ -3,14 +3,14 @@ importScripts(
   "https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"
 );
 
-var firebaseConfig = {
-  apiKey: "AIzaSyCaIKBIfi3OO5FqUtW7kRBvP4NWqyq2qUI",
-  authDomain: "test-fcm-a1205.firebaseapp.com",
-  projectId: "test-fcm-a1205",
-  storageBucket: "test-fcm-a1205.appspot.com",
-  messagingSenderId: "408902584117",
-  appId: "1:408902584117:web:ee6d2dcda80c7473746e7c",
-  measurementId: "G-WT2CJ81E9J",
+const firebaseConfig = {
+  apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
+  authDomain: "webpushnotification-18248.firebaseapp.com",
+  projectId: "webpushnotification-18248",
+  storageBucket: "webpushnotification-18248.appspot.com",
+  messagingSenderId: "633791818397",
+  appId: "1:633791818397:web:662c3155350fe23a22c274",
+  measurementId: "G-CL1SN2102X",
 };
 
 firebase.initializeApp(firebaseConfig);
