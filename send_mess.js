@@ -1,5 +1,5 @@
 // URL của API FCM
-const fcmApiUrl = `https://fcm.googleapis.com//v1/projects/test-fcm-a1205/messages:send`;
+const fcmApiUrl = `https://fcm.googleapis.com//v1/projects/webpushnotification-18248/messages:send`;
 
 // Device tokens của các thiết bị cần nhận tin nhắn
 const deviceTokens = [
