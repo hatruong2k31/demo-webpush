@@ -1,11 +1,11 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
-  authDomain: "webpushnotification-18248.firebaseapp.com",
-  projectId: "webpushnotification-18248",
-  storageBucket: "webpushnotification-18248.appspot.com",
-  messagingSenderId: "633791818397",
-  appId: "1:633791818397:web:662c3155350fe23a22c274",
-  measurementId: "G-CL1SN2102X",
+  apiKey: "AIzaSyCFFRppAHzuA3-fCIC6DGAjUw_G01EMYpo",
+  authDomain: "saleforce-201c6.firebaseapp.com",
+  projectId: "saleforce-201c6",
+  storageBucket: "saleforce-201c6.appspot.com",
+  messagingSenderId: "660663099160",
+  appId: "1:660663099160:web:1ba8f0df8131b7a935886d",
+  measurementId: "G-RZFQ4J7EL6",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -18,7 +18,7 @@ function IntitalizeFireBaseMessaging() {
       console.log("Quyền thông báo đã được cấp!");
       return messaging.getToken({
         vapidKey:
-          "BCy4EVfXHpIdK-unBIYieIfSBngDBPWwjsngkNz57UxW4N-ahPUgVgGY99fLIfIWTwIj1ZKeGi2yOJIP5Y9Rw28",
+          "BOSw0i09xdP2GgOwN3HUR71vSrEGhWg6dfyqgE90eQsRijdDDM-4aNeH1FNMcpeRzaxffE_7iFm5EcevckhMmtY",
       });
     })
     .then((token) => {
@@ -27,14 +27,16 @@ function IntitalizeFireBaseMessaging() {
       const registrationTokens = [token];
 
       const topic = "hehe"; // Thay thế với tên chủ đề của bạn
-      messaging
-        .subscribeToTopic(topic)
-        .then(() => {
-          console.log(`Đã đăng ký thành công với chủ đề ${topic}`);
-        })
-        .catch((error) => {
-          console.log(`Lỗi đăng ký với chủ đề ${topic}: `, error);
-        });
+
+      console.log(messaging);
+      // messaging
+      //   .subscribeToTopic(topic)
+      //   .then(() => {
+      //     console.log(`Đã đăng ký thành công với chủ đề ${topic}`);
+      //   })
+      //   .catch((error) => {
+      //     console.log(`Lỗi đăng ký với chủ đề ${topic}: `, error);
+      //   });
       // messaging
       //   .getMessaging()
       //   .subscribeToTopic(registrationTokens, topic)
