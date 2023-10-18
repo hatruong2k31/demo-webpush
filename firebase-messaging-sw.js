@@ -4,13 +4,13 @@ importScripts(
 );
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCFFRppAHzuA3-fCIC6DGAjUw_G01EMYpo",
-  authDomain: "saleforce-201c6.firebaseapp.com",
-  projectId: "saleforce-201c6",
-  storageBucket: "saleforce-201c6.appspot.com",
-  messagingSenderId: "660663099160",
-  appId: "1:660663099160:web:1ba8f0df8131b7a935886d",
-  measurementId: "G-RZFQ4J7EL6",
+  apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
+  authDomain: "webpushnotification-18248.firebaseapp.com",
+  projectId: "webpushnotification-18248",
+  storageBucket: "webpushnotification-18248.appspot.com",
+  messagingSenderId: "633791818397",
+  appId: "1:633791818397:web:662c3155350fe23a22c274",
+  measurementId: "G-CL1SN2102X",
 };
 
 firebase.initializeApp(firebaseConfig);
