@@ -3,7 +3,7 @@ importScripts(
   "https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"
 );
 
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
   authDomain: "webpushnotification-18248.firebaseapp.com",
   projectId: "webpushnotification-18248",

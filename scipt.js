@@ -1,4 +1,4 @@
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
   authDomain: "webpushnotification-18248.firebaseapp.com",
   projectId: "webpushnotification-18248",
@@ -18,7 +18,7 @@ function IntitalizeFireBaseMessaging() {
       console.log("Quyền thông báo đã được cấp!");
       return messaging.getToken({
         vapidKey:
-          "BOSw0i09xdP2GgOwN3HUR71vSrEGhWg6dfyqgE90eQsRijdDDM-4aNeH1FNMcpeRzaxffE_7iFm5EcevckhMmtY",
+          "BCy4EVfXHpIdK-unBIYieIfSBngDBPWwjsngkNz57UxW4N-ahPUgVgGY99fLIfIWTwIj1ZKeGi2yOJIP5Y9Rw28",
       });
     })
     .then((token) => {
