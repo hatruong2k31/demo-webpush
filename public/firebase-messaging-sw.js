@@ -1,64 +1,39 @@
+importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js");
+importScripts(
+  "https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"
+);
+
 var firebaseConfig = {
-  apiKey: "AIzaSyCaIKBIfi3OO5FqUtW7kRBvP4NWqyq2qUI",
-  authDomain: "test-fcm-a1205.firebaseapp.com",
-  projectId: "test-fcm-a1205",
-  storageBucket: "test-fcm-a1205.appspot.com",
-  messagingSenderId: "408902584117",
-  appId: "1:408902584117:web:ee6d2dcda80c7473746e7c",
-  measurementId: "G-WT2CJ81E9J",
+  apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
+  authDomain: "webpushnotification-18248.firebaseapp.com",
+  projectId: "webpushnotification-18248",
+  storageBucket: "webpushnotification-18248.appspot.com",
+  messagingSenderId: "633791818397",
+  appId: "1:633791818397:web:662c3155350fe23a22c274",
+  measurementId: "G-CL1SN2102X",
 };
+
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-function IntitalizeFireBaseMessaging() {
-  messaging
-    .requestPermission()
-    .then(() => {
-      console.log("Quyền thông báo đã được cấp!");
-      return messaging.getToken({
-        vapidKey:
-          "BGQkvie7tjIuh3b8D-HOTE3-W7oCDfcRnLMI9RpVPrmk72jjcH7yfs6EdTnR0iJFsXQYN9V0MIzP-Yzyh1jofxA",
-      });
-    })
-    .then(function (token) {
-      console.log("Token : " + token);
-      document.getElementById("token").innerHTML = token;
-    })
-    .catch(function (reason) {
-      console.log(reason);
-    });
-}
+messaging.onBackgroundMessage(function (payload) {
+  console.log("Received background message ", payload);
 
-messaging.onMessage(function (payload) {
-  console.log(payload);
-  const notificationOption = {
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
     body: payload.notification.body,
-    icon: payload.notification.icon,
+    icon: `logo192.png`,
+    image: payload.notification.image,
   };
+  self.registration.showNotification(notificationTitle, notificationOptions);
+  // handle something if u want
+  self.addEventListener("notificationclick", function (event) {
+    console.log("here", event, payload);
+    const urlToOpen = "http://localhost:3000?okeletgo=true"; // payload.data.url
 
-  if (Notification.permission === "granted") {
-    var notification = new Notification(
-      payload.notification.title,
-      notificationOption
-    );
+    event.notification.close();
 
-    notification.onclick = function (ev) {
-      ev.preventDefault();
-      window.open(payload.notification.click_action, "_blank");
-      notification.close();
-    };
-  }
+    // Mở đường link khi thông báo được nhấp
+    event.waitUntil(clients.openWindow(urlToOpen));
+  });
 });
-
-messaging.onTokenRefresh(function () {
-  messaging
-    .getToken()
-    .then(function (newtoken) {
-      console.log("New Token : " + newtoken);
-    })
-    .catch(function (reason) {
-      console.log(reason);
-    });
-});
-
-IntitalizeFireBaseMessaging();
