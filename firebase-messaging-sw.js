@@ -16,15 +16,24 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-messaging.setBackgroundMessageHandler((payload) => {
-  console.log(payload);
-  const notification = JSON.parse(payload);
-  const notificationOption = {
-    body: notification.body,
-    icon: notification.icon,
+messaging.onBackgroundMessage(function (payload) {
+  console.log("Received background message ", payload);
+
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: `logo192.png`,
+    image: payload.notification.image,
   };
-  return self.registration.showNotification(
-    payload.notification.title,
-    notificationOption
-  );
+  self.registration.showNotification(notificationTitle, notificationOptions);
+  // handle something if u want
+  self.addEventListener("notificationclick", function (event) {
+    console.log("here", event, payload);
+    const urlToOpen = "http://127.0.0.1:5500/?okeletgo=true"; // payload.data.url
+
+    event.notification.close();
+
+    // Mở đường link khi thông báo được nhấp
+    event.waitUntil(clients.openWindow(urlToOpen));
+  });
 });
