@@ -4,8 +4,8 @@ var firebaseConfig = {
   projectId: "webpushnotification-18248",
   storageBucket: "webpushnotification-18248.appspot.com",
   messagingSenderId: "633791818397",
-  appId: "1:633791818397:web:662c3155350fe23a22c274",
-  measurementId: "G-CL1SN2102X",
+  appId: "1:633791818397:web:b9822a9ac526ae1722c274",
+  measurementId: "G-PRVKSQ49ZW",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -24,28 +24,8 @@ function IntitalizeFireBaseMessaging() {
     .then((token) => {
       console.log("Token : " + token);
       document.getElementById("token").innerHTML = token;
-      const registrationTokens = [token];
 
-      const topic = "hehe"; // Thay thế với tên chủ đề của bạn
-
-      console.log(messaging);
-      // messaging
-      //   .subscribeToTopic(topic)
-      //   .then(() => {
-      //     console.log(`Đã đăng ký thành công với chủ đề ${topic}`);
-      //   })
-      //   .catch((error) => {
-      //     console.log(`Lỗi đăng ký với chủ đề ${topic}: `, error);
-      //   });
-      // messaging
-      //   .getMessaging()
-      //   .subscribeToTopic(registrationTokens, topic)
-      //   .then((response) => {
-      //     console.log("Successfully subscribed to topic:", response);
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error subscribing to topic:", error);
-      //   });
+      // Đẩy token sang cho Salesforce. Sau này nếu user có login thì tiếp tục đẩy token kèm user info sang
     })
     .catch((reason) => {
       console.error(reason);
