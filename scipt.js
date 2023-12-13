@@ -4,8 +4,8 @@ var firebaseConfig = {
   projectId: "webpushnotification-18248",
   storageBucket: "webpushnotification-18248.appspot.com",
   messagingSenderId: "633791818397",
-  appId: "1:633791818397:web:b9822a9ac526ae1722c274",
-  measurementId: "G-PRVKSQ49ZW",
+  appId: "1:633791818397:web:662c3155350fe23a22c274",
+  measurementId: "G-CL1SN2102X",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -25,7 +25,7 @@ function IntitalizeFireBaseMessaging() {
       console.log("Token : " + token);
       document.getElementById("token").innerHTML = token;
 
-      // Đẩy token sang cho Salesforce. Sau này nếu user có login thì tiếp tục đẩy token kèm user info sang
+      // handle something if u want
     })
     .catch((reason) => {
       console.error(reason);
@@ -33,7 +33,8 @@ function IntitalizeFireBaseMessaging() {
 }
 
 messaging.onMessage((payload) => {
-  console.log("payload", payload);
+  console.log("payload ", payload);
+  messaging.preventDefault();
 });
 
 messaging.onTokenRefresh(() => {

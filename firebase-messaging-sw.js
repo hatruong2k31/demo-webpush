@@ -9,8 +9,8 @@ var firebaseConfig = {
   projectId: "webpushnotification-18248",
   storageBucket: "webpushnotification-18248.appspot.com",
   messagingSenderId: "633791818397",
-  appId: "1:633791818397:web:b9822a9ac526ae1722c274",
-  measurementId: "G-PRVKSQ49ZW",
+  appId: "1:633791818397:web:662c3155350fe23a22c274",
+  measurementId: "G-CL1SN2102X",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -25,15 +25,19 @@ messaging.onBackgroundMessage(function (payload) {
     icon: `logo192.png`,
     image: payload.notification.image,
   };
-  self.registration.showNotification(notificationTitle, notificationOptions);
-  // handle something if u want. Đây là ví dụ thôi đừng có copy paste nguyên si
-  self.addEventListener("notificationclick", function (event) {
-    console.log("here", event, payload);
-    const urlToOpen = "http://127.0.0.1:5500/?okeletgo=true"; // payload.data.url
+  self.registration
+    .showNotification(notificationTitle, notificationOptions)
+    .then((notification) => {
+      self.addEventListener("notificationclick", function (event) {
+        event.preventDefault();
+        console.log("here", event, payload);
+        // const urlToOpen = "http://127.0.0.1:5500/?okeletgo=true";
+        const urlToOpen = payload?.data?.click_link;
 
-    event.notification.close();
+        event.notification.close();
 
-    // Mở đường link khi thông báo được nhấp
-    event.waitUntil(clients.openWindow(urlToOpen));
-  });
+        // Mở đường link khi thông báo được nhấp
+        event.waitUntil(clients.openWindow(urlToOpen));
+      });
+    });
 });
