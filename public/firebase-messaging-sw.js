@@ -18,6 +18,7 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
   console.log("Received background message ", payload);
+  console.log("data ", payload.data);
 
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
@@ -25,15 +26,17 @@ messaging.onBackgroundMessage(function (payload) {
     icon: `logo192.png`,
     image: payload.notification.image,
   };
-  self.registration.showNotification(notificationTitle, notificationOptions);
-  // handle something if u want
-  self.addEventListener("notificationclick", function (event) {
-    console.log("here", event, payload);
-    const urlToOpen = "http://localhost:3000?okeletgo=true"; // payload.data.url
 
-    event.notification.close();
+  self.registration
+    .showNotification(notificationTitle, notificationOptions)
+    .then((notification) => {
+      self.addEventListener("notificationclick", function (event) {
+        event.preventDefault();
+        console.log("here", payload.data?.click_link);
+        const urlToOpen = "http://localhost:3000/hehe"; // direct when user click
 
-    // Mở đường link khi thông báo được nhấp
-    event.waitUntil(clients.openWindow(urlToOpen));
-  });
+        event.notification.close();
+        clients.openWindow(urlToOpen);
+      });
+    });
 });
