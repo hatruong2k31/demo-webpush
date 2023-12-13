@@ -34,7 +34,21 @@ function IntitalizeFireBaseMessaging() {
 
 messaging.onMessage((payload) => {
   console.log("payload ", payload);
-  messaging.preventDefault();
+  const title = payload.data.title;
+  const options = {
+    body: payload.data.body,
+    data: { url: payload.data.click_link },
+    icon: `logo192.png`,
+    image: payload.data.image,
+  };
+  if (Notification.permission === "granted") {
+    var notification = new Notification(title, options);
+    notification.onclick = function (event) {
+      event.preventDefault();
+      window.open(payload.data.click_link, "_blank");
+      notification.close();
+    };
+  }
 });
 
 messaging.onTokenRefresh(() => {

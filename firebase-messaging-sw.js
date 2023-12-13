@@ -1,8 +1,9 @@
-importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js");
 importScripts(
-  "https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"
+  "https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"
 );
-
+importScripts(
+  "https://www.gstatic.com/firebasejs/10.1.0/firebase-messaging-compat.js"
+);
 var firebaseConfig = {
   apiKey: "AIzaSyCCSMhwQDwknF6JTpbVdilygUg7pyEyOGI",
   authDomain: "webpushnotification-18248.firebaseapp.com",
@@ -14,30 +15,39 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
   console.log("Received background message ", payload);
 
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
+  const title = payload.data.title;
+  const options = {
+    body: payload.data.body,
+    data: { url: payload.data.click_link },
     icon: `logo192.png`,
-    image: payload.notification.image,
+    image: payload.data.image,
   };
-  self.registration
-    .showNotification(notificationTitle, notificationOptions)
-    .then((notification) => {
-      self.addEventListener("notificationclick", function (event) {
-        event.preventDefault();
-        console.log("here", event, payload);
-        // const urlToOpen = "http://127.0.0.1:5500/?okeletgo=true";
-        const urlToOpen = payload?.data?.click_link;
+  return self.registration.showNotification(title, options);
+});
 
-        event.notification.close();
-
-        // Mở đường link khi thông báo được nhấp
-        event.waitUntil(clients.openWindow(urlToOpen));
-      });
-    });
+self.addEventListener("notificationclick", function (event) {
+  let url = event.notification.data.url;
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll({ type: "window" }).then((windowClients) => {
+      // Check if there is already a window/tab open with the target URL
+      for (var i = 0; i < windowClients.length; i++) {
+        var client = windowClients[i];
+        // If so, just focus it.
+        if (client.url === url && "focus" in client) {
+          return client.focus();
+        }
+      }
+      // If not, then open the target URL in a new window/tab.
+      if (clients.openWindow) {
+        return clients.openWindow(url);
+      }
+    })
+  );
 });
