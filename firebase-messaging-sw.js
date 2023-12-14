@@ -25,7 +25,7 @@ messaging.onBackgroundMessage(function (payload) {
   const options = {
     body: payload.data.body,
     data: { url: payload.data.click_link },
-    icon: `logo192.png`,
+    icon: `logo192.png`, // Dev vita đưa logo vita vào đây ..........................
     image: payload.data.image,
   };
   return self.registration.showNotification(title, options);
@@ -36,15 +36,15 @@ self.addEventListener("notificationclick", function (event) {
   event.notification.close();
   event.waitUntil(
     clients.matchAll({ type: "window" }).then((windowClients) => {
-      // Check if there is already a window/tab open with the target URL
+      // Ktra path của các tab
       for (var i = 0; i < windowClients.length; i++) {
         var client = windowClients[i];
-        // If so, just focus it.
+        // Nếu trùng url cần mở, focus nó
         if (client.url === url && "focus" in client) {
           return client.focus();
         }
       }
-      // If not, then open the target URL in a new window/tab.
+      // Nếu không trùng mở tab mới
       if (clients.openWindow) {
         return clients.openWindow(url);
       }

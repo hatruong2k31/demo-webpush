@@ -38,7 +38,7 @@ messaging.onMessage((payload) => {
   const options = {
     body: payload.data.body,
     data: { url: payload.data.click_link },
-    icon: `logo192.png`,
+    icon: `logo192.png`, // Dev vita đưa logo vita vào đây ..........................
     image: payload.data.image,
   };
   if (Notification.permission === "granted") {
