@@ -23,6 +23,7 @@ function IntitalizeFireBaseMessaging() {
     })
     .then((token) => {
       console.log("Token : " + token);
+
       document.getElementById("token").innerHTML = token;
 
       // handle something if u want
@@ -37,15 +38,15 @@ messaging.onMessage((payload) => {
   const title = payload.data.title;
   const options = {
     body: payload.data.body,
-    data: { url: payload.data.click_link },
-    icon: `logo192.png`, // Dev vita đưa logo vita vào đây ..........................
+    data: { url: payload.data.click_link || "https://vitadairy.vn" },
+    icon: payload.data.icon,
     image: payload.data.image,
   };
   if (Notification.permission === "granted") {
     var notification = new Notification(title, options);
     notification.onclick = function (event) {
       event.preventDefault();
-      window.open(payload.data.click_link, "_blank");
+      window.open(options.data.url, "_blank");
       notification.close();
     };
   }

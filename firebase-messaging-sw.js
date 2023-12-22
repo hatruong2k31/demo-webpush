@@ -24,8 +24,8 @@ messaging.onBackgroundMessage(function (payload) {
   const title = payload.data.title;
   const options = {
     body: payload.data.body,
-    data: { url: payload.data.click_link },
-    icon: `logo192.png`, // Dev vita đưa logo vita vào đây ..........................
+    data: { url: payload.data.click_link || "https://vitadairy.vn" },
+    icon: payload.data.icon,
     image: payload.data.image,
   };
   return self.registration.showNotification(title, options);
